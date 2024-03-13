@@ -10,11 +10,21 @@ function App() {
   const [score, setScore] = useState(0);
 
   const newGame = () => {
-    setInGame(true);
-    setGame(true)
-    setScore(0);
+    if (!game) {
+      setInGame(true);
+      setGame(true)
+      setScore(0);
+    } else {
+      setGame(false);
+      setTimeout(() => restartGame(), 0);
+    }
   }
 
+  const restartGame = () => {
+    setScore(0);
+    setGame(true);
+    setInGame(true);
+  }
 
 
   return (

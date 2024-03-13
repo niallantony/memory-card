@@ -46,7 +46,6 @@ export function Board({score, increaseScore, inGame, setGame}){
     },[]);
 
     const addPoint = () => {
-        console.log(inGame)
         if (inGame) {
             increaseScore(score+1);
         }
@@ -59,13 +58,16 @@ export function Board({score, increaseScore, inGame, setGame}){
 
     const clickCard = (pokemon) => {
         if (clickedPokemon.includes(pokemon)) {
-            console.table(clickedPokemon)
             gameOver();
         } else {
-            console.log(pokemon);
+            setPokemonArray(shuffleArray(pokemonArray));
             setClickedPokemon([...clickedPokemon, pokemon]);
             addPoint();
         }
+    }
+
+    const shuffleArray = (array) => {
+        return [...array].sort(() => Math.random() > 0.5 ? 1 : -1)
     }
 
     const createSet = (limit) => {
