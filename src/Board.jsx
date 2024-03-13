@@ -57,11 +57,13 @@ export function Board({score, increaseScore, inGame, setGame}){
     }
 
     const clickCard = (pokemon) => {
-        if (clickedPokemon.includes(pokemon)) {
+        if (clickedPokemon.includes(pokemon.name)) {
             gameOver();
-        } else {
+        } else if (inGame) {
+            let audio = new Audio(pokemon.cry);
+            audio.play();
             setPokemonArray(shuffleArray(pokemonArray));
-            setClickedPokemon([...clickedPokemon, pokemon]);
+            setClickedPokemon([...clickedPokemon, pokemon.name]);
             addPoint();
         }
     }

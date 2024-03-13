@@ -4,6 +4,7 @@ import "./Card.css";
 export function Card({pokeUrl, onClick}) {
     const [pokemon, setPokemon] = useState(null);
 
+    
     useEffect(() => {
         const getData = async () => {
             try {
@@ -14,6 +15,7 @@ export function Card({pokeUrl, onClick}) {
                     img: data.sprites.front_default,
                     cry: data.cries.legacy ? data.cries.legacy : data.cries.latest,
                 }
+                console.log(pokemon);
                 setPokemon(pokemon);
             } catch (err) {
                 console.error(err);
@@ -21,11 +23,13 @@ export function Card({pokeUrl, onClick}) {
         }
         getData();
     },[pokeUrl])
-
-    function clickCard() {
-        onClick(pokemon.name);
-    }
     
+    
+    function clickCard() {
+
+        onClick(pokemon);
+    }
+
     return (<>
         {pokemon ? (<div className="card" onClick={clickCard}><p className="name">{pokemon.name}</p><img alt={pokemon.name} src={pokemon.img} /></div>) : (<p>Loading...</p>)}
         </>)

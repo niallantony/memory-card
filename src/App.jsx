@@ -6,7 +6,7 @@ import './App.css'
 function App() {
 
   const [game, setGame] = useState(false);
-  const [inGame, setInGame] = useState(false);
+  const [inGame, setInGame] = useState(true);
   const [score, setScore] = useState(0);
 
   const newGame = () => {
@@ -29,7 +29,7 @@ function App() {
 
   return (
     <>
-      <Header score={score} newGame={newGame}/>
+      <Header score={score} inGame={inGame} newGame={newGame}/>
       {game ? (<Board score={score} increaseScore={setScore} inGame={inGame} setGame={setInGame}/>) : <></>}
     </>
   )
