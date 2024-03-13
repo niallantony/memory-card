@@ -1,17 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import { Board } from './Board'
+import { Header } from './Header';
+import { useState } from 'react';
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [game, setGame] = useState(null);
+  const [score, setScore] = useState(0);
+
+  const newGame = () => {
+    setGame(<Board onSuccess={increaseScore} />)
+    setScore(0);
+  }
+
+  const increaseScore = () => {
+    setScore(score + 1);
+  }
 
   return (
     <>
-
-      <Board />
-
+      <Header score={score} newGame={newGame}/>
+      {game}
     </>
   )
 }

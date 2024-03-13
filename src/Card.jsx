@@ -1,4 +1,5 @@
 import { useState, useEffect} from "react";
+import "./Card.css";
 
 export function Card({pokeUrl}) {
     const [pokemon, setPokemon] = useState(null);
@@ -13,14 +14,13 @@ export function Card({pokeUrl}) {
                     img: data.sprites.front_default,
                     cry: data.cries.legacy ? data.cries.legacy : data.cries.latest,
                 }
-                console.log(pokemon);
                 setPokemon(pokemon);
             } catch (err) {
                 console.error(err);
             }
         }
         getData();
-    },[])
+    },[pokeUrl])
 
     return (<>
         {pokemon ? (<div className="card"><p>{pokemon.name}</p><img alt={pokemon.name} src={pokemon.img} /></div>) : (<p>Loading...</p>)}
