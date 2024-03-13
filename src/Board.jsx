@@ -25,13 +25,14 @@ const pokemonSelection = async (pokedex, set) => {
     }
 }
 
-export function Board(){
+export function Board({score, increaseScore, inGame, setGame}){
 
     const POKEMON_LIMIT = 1025;
     const CARD_NUMBER = 12;
     
     const [pokemonArray, setPokemonArray] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [clickedPokemon, setClickedPokemon] = useState([]);
 
     useEffect(() => {
         const randomIds = createSet(CARD_NUMBER);
@@ -44,8 +45,27 @@ export function Board(){
         setLoading(false)
     },[]);
 
+    const addPoint = () => {
+        console.log(inGame)
+        if (inGame) {
+            increaseScore(score+1);
+        }
+    }
+
+    const gameOver = () => {
+        console.log("Game over...")
+        setGame(false);
+    }
+
     const clickCard = (pokemon) => {
-        console.log(pokemon);
+        if (clickedPokemon.includes(pokemon)) {
+            console.table(clickedPokemon)
+            gameOver();
+        } else {
+            console.log(pokemon);
+            setClickedPokemon([...clickedPokemon, pokemon]);
+            addPoint();
+        }
     }
 
     const createSet = (limit) => {
