@@ -38,12 +38,15 @@ export function Board(){
         const fillArray = async (set) => {
             const results = await fetchPokemon();
             const selection = await pokemonSelection(results, set);
-            const infoArray = selection.map((pokemon) => pokemon.url);
-            setPokemonArray(infoArray);
+            setPokemonArray(selection);
         }
         fillArray(randomIds);
         setLoading(false)
     },[]);
+
+    const clickCard = (pokemon) => {
+        console.log(pokemon);
+    }
 
     const createSet = (limit) => {
         const set = new Set();
@@ -55,7 +58,7 @@ export function Board(){
 
     return(
         <div className="board">
-            {loading ? (<p>Now Loading...</p>) : pokemonArray.map((pokemon) => (<Card key={uuidv4()} pokeUrl={pokemon}/>))}
+            {loading ? (<p>Now Loading...</p>) : pokemonArray.map((pokemon) => (<Card key={uuidv4()} onClick={(pokemon) => clickCard(pokemon)} pokeUrl={pokemon.url}/>))}
         </div>
     )
 }

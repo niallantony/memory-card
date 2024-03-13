@@ -3,3 +3,7 @@
     border-radius: 15px;
     margin: 1rem;
 }
+
+.name {
+    text-transform: capitalize;
+}
