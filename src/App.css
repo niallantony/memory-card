@@ -33,8 +33,10 @@
   }
 }
 
-.card {
-  padding: 2em;
+@media (max-width:992px) {
+  #root {
+    padding: 0;
+  }
 }
 
 .read-the-docs {
